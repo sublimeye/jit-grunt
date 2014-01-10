@@ -1,11 +1,12 @@
 'use strict';
 module.exports = function (grunt, plugins) {
+	plugins = plugins || {};
+
   var path = require('path');
-
   var PREFIXES = ['', 'grunt-', 'grunt-contrib-'];
-  var loaded = {};
   var root = path.resolve('node_modules');
-
+	var run = grunt.task.run;
+	var loaded = {};
 
   var loadPlugin = function (name) {
     var tasksDir = path.join(root, name, 'tasks');
@@ -18,9 +19,6 @@ module.exports = function (grunt, plugins) {
     return false;
   };
 
-  plugins = plugins || {};
-
-  var run = grunt.task.run;
   grunt.task.run = function (tasks) {
     tasks = Array.isArray(tasks) ? tasks : [tasks];
     tasks.forEach(function (task) {
